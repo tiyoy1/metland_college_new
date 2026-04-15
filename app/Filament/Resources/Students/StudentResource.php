@@ -7,12 +7,14 @@ use App\Filament\Resources\Students\Pages\EditStudent;
 use App\Filament\Resources\Students\Pages\ListStudents;
 use App\Filament\Resources\Students\Schemas\StudentForm;
 use App\Filament\Resources\Students\Tables\StudentsTable;
+use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 use App\Models\Student;
-use BackedEnum;
+use BackedEnum; 
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Table;
 
 class StudentResource extends Resource
 {
@@ -29,7 +31,12 @@ class StudentResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return StudentsTable::configure($table);
+        return $table
+            ->columns([
+                TextColumn::make('name'),
+                TextColumn::make('email'),
+                ImageColumn::make('image'),
+            ]);
     }
 
     public static function getRelations(): array
